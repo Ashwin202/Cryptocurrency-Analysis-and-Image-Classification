@@ -5,3 +5,4 @@ numpy
 matplotlib
 plotly
 tensorflow
+streamlit-option-menu
