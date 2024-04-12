@@ -1,5 +1,5 @@
 import streamlit as st
-# Import specific functions for each app feature
+
 from apps.coin_comparison import display_crypto_comparison
 from apps.coin_detail import display_cryptocurrency_details
 from apps.digit_classifier import display_digit_classifier
