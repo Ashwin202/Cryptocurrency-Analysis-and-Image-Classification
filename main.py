@@ -1,20 +1,23 @@
 import streamlit as st
-from streamlit_apps.coin_detail import show_app_crypto_detail
-from streamlit_apps.coin_comparison import show_app_crypto_comparison
-from streamlit_apps.digit_classifier import show_app_digit_classifier
+# Import specific functions for each app feature
+from apps.coin_comparison import display_crypto_comparison
+from apps.coin_detail import display_crypto_details
+from apps.digit_classifier import display_digit_classifier
 
+def main():
+    tab_selector = st.sidebar.radio("Select Application", ['Crypto Tracker', 'Digit Classifier'])
 
-# Navigation
-app_selection = st.sidebar.radio("Go to", ['Crypto App', 'Digit Classifier'])
+    if tab_selector == 'Crypto Tracker':
+        detail_tab, comparison_tab = st.tabs(["Detailed View", "Comparison View"])
+        
+        with detail_tab:
+            display_crypto_details()
+        
+        with comparison_tab:
+            display_crypto_comparison()
+    
+    elif tab_selector == 'Digit Classifier':
+        display_digit_classifier()
 
-if app_selection == 'Crypto App':
-    tab1, tab2 = st.tabs(["Coin Detail", "Coin Comparison"])
-    with tab1:
-        show_app_crypto_detail()
-
-    with tab2:
-        show_app_crypto_comparison()
-elif app_selection == 'Digit Classifier':
-    show_app_digit_classifier()
-
-
+if __name__ == "__main__":
+    main()

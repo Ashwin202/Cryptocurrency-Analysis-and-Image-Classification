@@ -2,20 +2,11 @@ import streamlit as st
 import pandas as pd
 import plotly.graph_objs as go
 from utils.crypto_utils import fetch_all_coins_list, fetch_historical_data
+from lib.coin_detail_fn import fetch_coins_list, get_single_coin_historical_data
 
-def show_app_crypto_detail():
+def display_crypto_details():
     # Streamlit App Title
     st.title('Cryptocurrency Details App')
-
-    # Fetching all available coins
-    def fetch_coins_list():
-        response = fetch_all_coins_list()
-        return response if response is not None else []
-
-    # Fetching historical data of a coin 
-    def fetch_single_coin_historical_data(coin_id):
-        response = fetch_historical_data(coin_id, 365)
-        return response if response is not None else {}
 
     coins_list = fetch_coins_list()
     coins_names = [coin['name'] for coin in coins_list]
@@ -26,7 +17,7 @@ def show_app_crypto_detail():
     coin_id = next((coin['id'] for coin in coins_list if coin['name'].lower() == user_input), None)
 
     if coin_id:
-        data = fetch_single_coin_historical_data(coin_id)
+        data = get_single_coin_historical_data(coin_id)
         if data:
             prices = pd.DataFrame(data, columns=['timestamp', 'price'])
             prices['date'] = pd.to_datetime(prices['timestamp'], unit='ms')

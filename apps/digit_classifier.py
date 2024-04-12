@@ -3,7 +3,7 @@ from utils.model_utils import load_model, make_prediction
 from utils.image_utils import preprocess_image
 from PIL import Image
 
-def show_app_digit_classifier():
+def display_digit_classifier():
 
     st.title('Digit Classifier')
 

@@ -3,7 +3,7 @@ import plotly.graph_objs as go
 import pandas as pd
 from utils.crypto_utils import fetch_all_coins_list, fetch_historical_data, unix_to_datetime
 
-def show_app_crypto_comparison():
+def display_crypto_comparison():
     # Streamlit App Title
     st.title('Cryptocurrency Comparison App')
 
