@@ -1,7 +1,7 @@
 import streamlit as st
 # Import specific functions for each app feature
 from apps.coin_comparison import display_crypto_comparison
-from apps.coin_detail import display_crypto_details
+from apps.coin_detail import display_cryptocurrency_details
 from apps.digit_classifier import display_digit_classifier
 
 def main():
@@ -11,7 +11,7 @@ def main():
         detail_tab, comparison_tab = st.tabs(["Detailed View", "Comparison View"])
         
         with detail_tab:
-            display_crypto_details()
+            display_cryptocurrency_details()
         
         with comparison_tab:
             display_crypto_comparison()
