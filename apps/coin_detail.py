@@ -5,7 +5,7 @@ from lib.coin_detail_fn import fetch_coins_list, fetch_historical_price_data, pl
 
 def display_cryptocurrency_details():
     """Display details and historical price chart of a cryptocurrency."""
-    st.title('Cryptocurrency Details App')
+    st.title('Crypto Insight Hub')
 
     # Fetch the list of all coins
     all_coins = fetch_coins_list()

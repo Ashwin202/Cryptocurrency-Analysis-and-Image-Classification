@@ -6,7 +6,7 @@ from lib.coin_detail_fn import create_coin_selection_box, load_and_prepare_data
 
 
 def display_crypto_comparison():
-    st.title('Cryptocurrency Comparison App')
+    st.title('Crypto Contrast Analyzer')
 
     coins_list = fetch_all_coins_list()
     coins_dict = {coin['id']: coin['name'] for coin in coins_list}
