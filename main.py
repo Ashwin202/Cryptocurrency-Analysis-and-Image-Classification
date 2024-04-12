@@ -11,13 +11,13 @@ st.set_page_config(page_title="My Streamlit App", page_icon=":sparkles:", layout
 
 # Define the main function that will contain our UI elements
 def main():
-    # Apply default Streamlit styles for a dark theme
     st.markdown(
         """
         <style>
         .st-bx {color: white;} /* Base text color */
         .st-bs {color: #FF4B4B;} /* Highlight color */
         .css-1v3fvcr {border-color: #666666;} /* Widget borders */
+        .css-1mcb7zo {padding: 10px;} /* Padding for tab content */
         </style>
         """,
         unsafe_allow_html=True
@@ -26,7 +26,7 @@ def main():
     # Create a container to host the navigation menu
     with st.container():
         tab_selector = option_menu(
-            menu_title="Applicatin Hub",
+            menu_title="A00476511 - Assignment",
             options=["Crypto Tracker", "Digit Classifier"],
             icons=["wallet2", "cpu-fill"],
             menu_icon="cast",
@@ -40,18 +40,19 @@ def main():
             }
         )
 
-    # Decision block to handle different tabs
+    # Use containers within tabs to properly layout and manage the space for each section
     if tab_selector == 'Crypto Tracker':
         detail_tab, comparison_tab = st.tabs(["Detailed View", "Comparison View"])
         
-        with detail_tab:
+        with detail_tab.container():
             display_cryptocurrency_details()
         
-        with comparison_tab:
+        with comparison_tab.container():
             display_crypto_comparison()
     
     elif tab_selector == 'Digit Classifier':
-        display_digit_classifier()
+        with st.container():
+            display_digit_classifier()
 
 # Ensure that the application runs when executed as a script
 if __name__ == "__main__":

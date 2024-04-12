@@ -16,4 +16,4 @@ def display_digit_classifier():
         st.success(f'The digit predicted is: {predicted_class} with a confidence of {confidence:.2f}')
         
         # Display the uploaded image below the button
-        st.image(image, caption='Uploaded Image', use_column_width=True)
+        st.image(image, caption='Uploaded Image', use_column_width=True, width=400)
