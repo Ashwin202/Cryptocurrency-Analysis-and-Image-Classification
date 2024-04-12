@@ -10,7 +10,7 @@ def display_digit_classifier():
     uploaded_image = st.file_uploader("Choose an image...", type=["jpg", "jpeg", "png"])
     if uploaded_image is not None:
         image = Image.open(uploaded_image)
-        model = load_model('model/digit_classifier_model.keras')
+        model = load_model('model/mnist_model.h5')
         preprocessed_image = preprocess_image(image)
         predicted_class, confidence = make_prediction(model, preprocessed_image)
         st.success(f'The digit predicted is: {predicted_class} with a confidence of {confidence:.2f}')
