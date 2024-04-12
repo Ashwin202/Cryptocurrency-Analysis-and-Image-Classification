@@ -6,7 +6,7 @@
 
 Visit the following URL to interact with the deployed application:
 
-- [A00463237 Streamlit Application](https://a00463237-pythonassignment.streamlit.app/)
+- [A00476511 Streamlit Application](https://python-assignment-a00476511.streamlit.app/)
 
 This repository contains a Python assignment focused on creating interactive Streamlit applications for cryptocurrency analysis and image classification. The assignment consists of three parts:
 
@@ -42,7 +42,7 @@ An image classification Streamlit app that identifies digits (0-9) in uploaded i
 
 ### Test Accuracy of the Image Classifier Model
 
-- Test accuracy: 0.9919
+- Test accuracy: 0.9900
 
 ## How to Use
 
