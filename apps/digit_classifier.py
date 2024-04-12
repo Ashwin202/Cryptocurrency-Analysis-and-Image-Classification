@@ -6,7 +6,6 @@ from PIL import Image
 def display_digit_classifier():
 
     st.title('MNIST Digit Classifier')
-    col1, col2, col3 = st.columns([1,2,1])
 
     uploaded_image = st.file_uploader("Choose an image...", type=["jpg", "jpeg", "png"])
     if uploaded_image is not None:
@@ -16,5 +15,7 @@ def display_digit_classifier():
         predicted_class, confidence = make_prediction(model, preprocessed_image)
         st.success(f'The digit predicted is: {predicted_class} with a confidence of {confidence:.2f}')
         
-        with col2:
+       
+        col1, col2, col3 = st.columns([1,2,1])
+        with col2: 
             st.image(image, caption='Uploaded Image', width=400)
