@@ -42,7 +42,7 @@ An image classification Streamlit app that identifies digits (0-9) in uploaded i
 
 ### Test Accuracy of the Image Classifier Model
 
-- Test accuracy: 0.9900
+- Test accuracy: 0.9915
 
 ## How to Use
 
