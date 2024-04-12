@@ -26,7 +26,7 @@ def main():
     # Create a container to host the navigation menu
     with st.container():
         tab_selector = option_menu(
-            menu_title="A00476511 - Assignment",
+            menu_title="Application Hub",
             options=["Crypto Tracker", "Digit Classifier"],
             icons=["wallet2", "cpu-fill"],
             menu_icon="cast",
