@@ -1,46 +1,39 @@
 import streamlit as st
 import pandas as pd
 import plotly.graph_objs as go
-from utils.crypto_utils import fetch_all_coins_list, fetch_historical_data
-from lib.coin_detail_fn import fetch_coins_list, get_single_coin_historical_data
+from lib.coin_detail_fn import fetch_coins_list, fetch_historical_price_data, plot_historical_prices, display_price_extremes
 
-def display_crypto_details():
-    # Streamlit App Title
+def display_cryptocurrency_details():
+    """Display details and historical price chart of a cryptocurrency."""
     st.title('Cryptocurrency Details App')
 
-    coins_list = fetch_coins_list()
-    coins_names = [coin['name'] for coin in coins_list]
+    # Fetch the list of all coins
+    all_coins = fetch_coins_list()
+    coin_names = [coin['name'] for coin in all_coins]
 
-    # User input for cryptocurrency name with a dropdown menu
-    default_index = coins_names.index('Bitcoin') if 'Bitcoin' in coins_names else 0
-    user_input = st.selectbox('Select the cryptocurrency:', options=coins_names, index=default_index).lower()
-    coin_id = next((coin['id'] for coin in coins_list if coin['name'].lower() == user_input), None)
+    # User input for cryptocurrency selection
+    default_coin_index = coin_names.index('Bitcoin') if 'Bitcoin' in coin_names else 0
+    selected_coin = st.selectbox('Select the cryptocurrency:', options=coin_names, index=default_coin_index).lower()
+    selected_coin_id = next((coin['id'] for coin in all_coins if coin['name'].lower() == selected_coin), None)
 
-    if coin_id:
-        data = get_single_coin_historical_data(coin_id)
-        if data:
-            prices = pd.DataFrame(data, columns=['timestamp', 'price'])
-            prices['date'] = pd.to_datetime(prices['timestamp'], unit='ms')
+    if selected_coin_id:
+        # Fetch historical price data for the selected coin
+        historical_data = fetch_historical_price_data(selected_coin_id)
+        if historical_data:
+            price_data = pd.DataFrame(historical_data, columns=['timestamp', 'price'])
+            price_data['date'] = pd.to_datetime(price_data['timestamp'], unit='ms')
             
-            # Plotting with Plotly  
-            if not prices.empty:
-                fig = go.Figure()
-                fig.add_trace(go.Scatter(x=prices['date'], y=prices['price'], mode='lines', name='Price'))
-                fig.update_layout(title=f'{user_input.capitalize()} Price Chart (Last Year)', xaxis_title='Date', yaxis_title='Price in USD')
-                st.plotly_chart(fig, use_container_width=True)
-                
-                # Display max and min prices and dates
-                max_price = prices['price'].max()
-                min_price = prices['price'].min()
-                max_date = prices.loc[prices['price'].idxmax()]['date']
-                min_date = prices.loc[prices['price'].idxmin()]['date']
-
-                col1, col2 = st.columns(2)
-                col1.metric("Maximum Price", f"${max_price:.3f}", f"On {max_date.strftime('%Y-%m-%d')}")
-                col2.metric("Minimum Price", f"${min_price:.3f}", f"On {min_date.strftime('%Y-%m-%d')}", delta_color="inverse")
+            # Plot historical price data if available
+            if not price_data.empty:
+                plot_historical_prices(selected_coin, price_data)
+                # Display maximum and minimum prices
+                display_price_extremes(price_data)
             else:
                 st.error("No price data available for the selected cryptocurrency.")
         else:
             st.error("Failed to fetch historical data.")
     else:
-        st.info("Please enter a cryptocurrency name.")
+        st.info("Please select a valid cryptocurrency name.")
+
+if __name__ == "__main__":
+    display_cryptocurrency_details()
